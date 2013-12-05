@@ -1,0 +1,8 @@
+#! /usr/bin/env zsh
+
+rm -Rf build && \
+mkdir -p build && \
+cd build && \
+CXX=g++ CC=gcc cmake .. $* && \
+cd .. && \
+./make_all $*
