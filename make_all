@@ -1,6 +1,6 @@
 #! /usr/bin/env zsh
 
 cd build && \
-CXX=g++ CC=gcc make -j8  && \
+CXX=clang++ CC=clang make -j8  && \
 
 cd ..
