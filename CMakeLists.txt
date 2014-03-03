@@ -18,14 +18,6 @@ SET(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_SOURCE_DIR}/cmake")
 # swig interface files
 INCLUDE_DIRECTORIES(${CMAKE_SOURCE_DIR}/swig)
 
-# set path to include MacPorts rather thanl local python libraries. 
-IF(APPLE)
-    SET(CMAKE_LIBRARY_PATH /opt/local/lib ${CMAKE_LIBRARY_PATH})
-    #set(CMAKE_CXX_FLAGS "-g")        ## Debug
-#    set(CMAKE_CXX_FLAGS "-O3 -fPIC -Wno-null-conversion")        ## Optimize
-    set(CMAKE_CXX_FLAGS "-O3 -fPIC")        ## Optimize
-ENDIF (APPLE)
-
 SET(CMAKE_SWIG_FLAGS "-builtin")
 
 ##########################
@@ -62,7 +54,9 @@ INCLUDE_DIRECTORIES(${CMAKE_CURRENT_SOURCE_DIR}/AntTweakBar/include)
 
 SET(CMAKE_EXE_LINKER_FLAGS ${CMAKE_EXE_LINKER_FLAGS} "-fPIC")
 SET(CMAKE_EXE_SHARED_FLAGS ${CMAKE_EXE_SHARED_FLAGS} "-fPIC")
+# set path to include MacPorts rather thanl local python libraries. 
 IF(APPLE)
+    SET(CMAKE_LIBRARY_PATH /opt/local/lib ${CMAKE_LIBRARY_PATH})
     SET(CMAKE_CXX_FLAGS "-O3 -w -fPIC -fno-strict-aliasing -D_MACOSX -ObjC++ -D__PLACEMENT_NEW_INLINE")
 ELSE()
     SET(CMAKE_CXX_FLAGS "-O3 -w -fPIC -fno-strict-aliasing -D_UNIX -D__PLACEMENT_NEW_INLINE")

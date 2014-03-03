@@ -3,6 +3,6 @@
 rm -Rf build && \
 mkdir -p build && \
 cd build && \
-CXX=clang++ CC=clang cmake .. $* && \
+cmake .. $* && \
 cd .. && \
 ./make_all $*
