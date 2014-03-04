@@ -35,6 +35,9 @@
 
 %include "common.i"
 
+// Ignore Windows-related symbols in AntTweakBar 1.16
+%ignore TwEventWin;
+
 %include "AntTweakBar.h"
 %include "AntTweakBarSWIG.h"
 

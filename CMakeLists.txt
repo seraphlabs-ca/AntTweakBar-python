@@ -3,14 +3,14 @@ CMAKE_MINIMUM_REQUIRED(VERSION 2.8)
 PROJECT(ANTTWEAKBAR)
 
 # Compiler flags
-if(CMAKE_COMPILER_IS_GNUCXX)
+#if(CMAKE_COMPILER_IS_GNUCXX)
 #    set(CMAKE_CXX_FLAGS "-O3 -fopenmp")        ## Optimize
     set(CMAKE_CXX_FLAGS "-O3 -fPIC")        ## Optimize
 #    set(CMAKE_EXE_LINKER_FLAGS "-s -fPIC")  ## Strip binary
 #    set(CMAKE_EXE_SHARED_FLAGS "-s -fPIC")  ## Strip binary
 #    set(CMAKE_EXE_MODULE_FLAGS "-s -fPIC")  ## Strip binary
 #    set(CMAKE_CXX_FLAGS "-g")        ## Debug
-endif()
+#endif()
 
 # CMake finder files
 SET(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_SOURCE_DIR}/cmake")
@@ -63,14 +63,21 @@ ELSE()
 ENDIF (APPLE)
 SET(CMAKE_C_FLAGS ${CMAKE_CXX_FLAGS})
 
-SET(SRC_FILES_NAME TwColors.cpp TwFonts.cpp TwOpenGL.cpp TwBar.cpp TwMgr.cpp 
-    TwPrecomp.cpp LoadOGL.cpp TwEventGLFW.c TwEventGLUT.c TwEventSDL.c 
-    TwEventSDL12.c TwEventSDL13.c TwEventSFML.cpp AntPerfTimer.h  
-    LoadOGL.h MiniSDL12.h resource.h TwDirect3D10.h TwFonts.h TwOpenGLCore.h 
-    d3d10vs2003.h MiniGLFW.h MiniSDL13.h TwBar.h TwDirect3D11.h TwGraph.h 
-    TwOpenGL.h LoadOGLCore.h MiniGLUT.h MiniSFML16.h TwColors.h TwDirect3D9.h 
-    TwMgr.h TwPrecomp.h ../include/AntTweakBar.h)
-    
+# set all relevant source names
+# AntTWeakBar1.14
+#SET(SRC_FILES_NAME TwColors.cpp TwFonts.cpp TwOpenGL.cpp TwBar.cpp TwMgr.cpp 
+#    TwPrecomp.cpp LoadOGL.cpp TwEventGLFW.c TwEventGLUT.c TwEventSDL.c 
+#    TwEventSDL12.c TwEventSDL13.c TwEventSFML.cpp AntPerfTimer.h  
+#    LoadOGL.h MiniSDL12.h resource.h TwDirect3D10.h TwFonts.h TwOpenGLCore.h 
+#    d3d10vs2003.h MiniGLFW.h MiniSDL13.h TwBar.h TwDirect3D11.h TwGraph.h 
+#    TwOpenGL.h LoadOGLCore.h MiniGLUT.h MiniSFML16.h TwColors.h TwDirect3D9.h 
+#    TwMgr.h TwPrecomp.h ../include/AntTweakBar.h)
+
+# AntTWeakBar1.16
+SET(SRC_FILES_NAME TwColors.cpp TwFonts.cpp TwOpenGL.cpp TwOpenGLCore.cpp 
+    TwBar.cpp TwMgr.cpp LoadOGL.cpp LoadOGLCore.cpp TwEventGLFW.c TwEventGLUT.c 
+    TwEventSDL.c TwEventSDL12.c TwEventSDL13.c TwEventSFML.cpp)
+     
 FOREACH (F ${SRC_FILES_NAME})
     SET(SRC_FILES ${SRC_FILES} "AntTweakBar/src/${F}")
 ENDFOREACH(F)
