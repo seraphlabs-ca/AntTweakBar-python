@@ -57,9 +57,25 @@ SET(CMAKE_EXE_SHARED_FLAGS ${CMAKE_EXE_SHARED_FLAGS} "-fPIC")
 # set path to include MacPorts rather thanl local python libraries. 
 IF(APPLE)
     SET(CMAKE_LIBRARY_PATH /opt/local/lib ${CMAKE_LIBRARY_PATH})
-    SET(CMAKE_CXX_FLAGS "-O3 -w -fPIC -fno-strict-aliasing -D_MACOSX -ObjC++ -D__PLACEMENT_NEW_INLINE")
+    ADD_DEFINITIONS(
+    -O3 
+    -w -fPIC 
+    -fno-strict-aliasing 
+    -D_MACOSX 
+    -ObjC++ 
+    -D__PLACEMENT_NEW_INLINE 
+    -fvisibility-inlines-hidden
+    )
 ELSE()
-    SET(CMAKE_CXX_FLAGS "-O3 -w -fPIC -fno-strict-aliasing -D_UNIX -D__PLACEMENT_NEW_INLINE")
+    ADD_DEFINITIONS(
+    -O3 
+    -w 
+    -fPIC 
+    -fno-strict-aliasing 
+    -D_UNIX 
+    -D__PLACEMENT_NEW_INLINE
+    -fvisibility-inlines-hidden
+    )
 ENDIF (APPLE)
 SET(CMAKE_C_FLAGS ${CMAKE_CXX_FLAGS})
 
