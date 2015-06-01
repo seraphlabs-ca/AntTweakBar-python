@@ -1,6 +1,5 @@
 #! /usr/bin/env zsh
 
-cd build && \
+cd cpp/build && \
 make -j8  && \
-
-cd ..
+cd ../..

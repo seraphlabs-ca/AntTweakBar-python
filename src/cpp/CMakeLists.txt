@@ -5,18 +5,21 @@ PROJECT(ANTTWEAKBAR)
 # Compiler flags
 #if(CMAKE_COMPILER_IS_GNUCXX)
 #    set(CMAKE_CXX_FLAGS "-O3 -fopenmp")        ## Optimize
-    set(CMAKE_CXX_FLAGS "-O3 -fPIC")        ## Optimize
+#    set(CMAKE_CXX_FLAGS "-O3 -fPIC")        ## Optimize
 #    set(CMAKE_EXE_LINKER_FLAGS "-s -fPIC")  ## Strip binary
 #    set(CMAKE_EXE_SHARED_FLAGS "-s -fPIC")  ## Strip binary
 #    set(CMAKE_EXE_MODULE_FLAGS "-s -fPIC")  ## Strip binary
 #    set(CMAKE_CXX_FLAGS "-g")        ## Debug
 #endif()
 
+# Common files
+SET(COMMON_PATH "${CMAKE_SOURCE_DIR}/../../../Common")
+
 # CMake finder files
-SET(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_SOURCE_DIR}/cmake")
+SET(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${COMMON_PATH}/cmake")
 
 # swig interface files
-INCLUDE_DIRECTORIES(${CMAKE_SOURCE_DIR}/swig)
+INCLUDE_DIRECTORIES("${COMMON_PATH}/swig")
 
 SET(CMAKE_SWIG_FLAGS "-builtin")
 
@@ -49,8 +52,8 @@ FIND_PACKAGE(Numpy REQUIRED)
 INCLUDE_DIRECTORIES(${NUMPY_INCLUDE_DIR})
 
 INCLUDE_DIRECTORIES(${CMAKE_CURRENT_SOURCE_DIR})
-INCLUDE_DIRECTORIES(${CMAKE_CURRENT_SOURCE_DIR}/AntTweakBar/src)
-INCLUDE_DIRECTORIES(${CMAKE_CURRENT_SOURCE_DIR}/AntTweakBar/include)
+INCLUDE_DIRECTORIES(${CMAKE_CURRENT_SOURCE_DIR}/../packages/AntTweakBar/src)
+INCLUDE_DIRECTORIES(${CMAKE_CURRENT_SOURCE_DIR}/../packages/AntTweakBar/include)
 
 SET(CMAKE_EXE_LINKER_FLAGS ${CMAKE_EXE_LINKER_FLAGS} "-fPIC")
 SET(CMAKE_EXE_SHARED_FLAGS ${CMAKE_EXE_SHARED_FLAGS} "-fPIC")
@@ -95,7 +98,7 @@ SET(SRC_FILES_NAME TwColors.cpp TwFonts.cpp TwOpenGL.cpp TwOpenGLCore.cpp
     TwEventSDL.c TwEventSDL12.c TwEventSDL13.c TwEventSFML.cpp)
      
 FOREACH (F ${SRC_FILES_NAME})
-    SET(SRC_FILES ${SRC_FILES} "AntTweakBar/src/${F}")
+    SET(SRC_FILES ${SRC_FILES} "${CMAKE_SOURCE_DIR}/../packages/AntTweakBar/src/${F}")
 ENDFOREACH(F)
 
 
