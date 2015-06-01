@@ -12,8 +12,11 @@ PROJECT(ANTTWEAKBAR)
 #    set(CMAKE_CXX_FLAGS "-g")        ## Debug
 #endif()
 
+# Base research path
+SET(RESEARCH_PATH "${CMAKE_SOURCE_DIR}/../../..")
+
 # Common files
-SET(COMMON_PATH "${CMAKE_SOURCE_DIR}/../../../Common")
+SET(COMMON_PATH "${RESEARCH_PATH}/Common")
 
 # CMake finder files
 SET(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${COMMON_PATH}/cmake")
