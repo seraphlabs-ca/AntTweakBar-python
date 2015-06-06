@@ -2,40 +2,16 @@
 CMAKE_MINIMUM_REQUIRED(VERSION 2.8)
 PROJECT(ANTTWEAKBAR)
 
-# Compiler flags
-#if(CMAKE_COMPILER_IS_GNUCXX)
-#    set(CMAKE_CXX_FLAGS "-O3 -fopenmp")        ## Optimize
-#    set(CMAKE_CXX_FLAGS "-O3 -fPIC")        ## Optimize
-#    set(CMAKE_EXE_LINKER_FLAGS "-s -fPIC")  ## Strip binary
-#    set(CMAKE_EXE_SHARED_FLAGS "-s -fPIC")  ## Strip binary
-#    set(CMAKE_EXE_MODULE_FLAGS "-s -fPIC")  ## Strip binary
-#    set(CMAKE_CXX_FLAGS "-g")        ## Debug
-#endif()
-
 # Base research path
 SET(RESEARCH_PATH "${CMAKE_SOURCE_DIR}/../../..")
 
-# Common files
-SET(COMMON_PATH "${RESEARCH_PATH}/Common")
+# setup header
+INCLUDE(${RESEARCH_PATH}/Common/cmake/HeaderConfig.cmake)
 
-# CMake finder files
-SET(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${COMMON_PATH}/cmake")
+# setup compiler flags
+INCLUDE(${RESEARCH_PATH}/Common/cmake/CompilerFlagsConfig.cmake)
 
-# swig interface files
-INCLUDE_DIRECTORIES("${COMMON_PATH}/swig")
-
-SET(CMAKE_SWIG_FLAGS "-builtin")
-
-##########################
-# Build AntTweakBar library and Python module.
-# Note: Must use clang for Objective C++ support.
-##########################
-
-IF(APPLE)
-  include_directories(/usr/X11R6/include/)
-  include_directories(/usr/include/malloc)
-  link_directories(/usr/X11R6/lib)
-ENDIF (APPLE)
+# build library
 
 FIND_PACKAGE(SWIG REQUIRED)
 INCLUDE(${SWIG_USE_FILE})
@@ -58,31 +34,16 @@ INCLUDE_DIRECTORIES(${CMAKE_CURRENT_SOURCE_DIR})
 INCLUDE_DIRECTORIES(${CMAKE_CURRENT_SOURCE_DIR}/../packages/AntTweakBar/src)
 INCLUDE_DIRECTORIES(${CMAKE_CURRENT_SOURCE_DIR}/../packages/AntTweakBar/include)
 
-SET(CMAKE_EXE_LINKER_FLAGS ${CMAKE_EXE_LINKER_FLAGS} "-fPIC")
-SET(CMAKE_EXE_SHARED_FLAGS ${CMAKE_EXE_SHARED_FLAGS} "-fPIC")
 # set path to include MacPorts rather thanl local python libraries. 
 IF(APPLE)
-    SET(CMAKE_LIBRARY_PATH /opt/local/lib ${CMAKE_LIBRARY_PATH})
     ADD_DEFINITIONS(
-    -O3 
-    -w -fPIC 
-    -fno-strict-aliasing 
     -D_MACOSX 
     -ObjC++ 
     -D__PLACEMENT_NEW_INLINE 
-    -fvisibility-inlines-hidden
     )
 ELSE()
-    ADD_DEFINITIONS(
-    -O3 
-    -w 
-    -fPIC 
-    -fno-strict-aliasing 
-    -D_UNIX 
-    -D__PLACEMENT_NEW_INLINE
-    -fvisibility-inlines-hidden
-    )
 ENDIF (APPLE)
+
 SET(CMAKE_C_FLAGS ${CMAKE_CXX_FLAGS})
 
 # set all relevant source names
@@ -115,6 +76,8 @@ TARGET_LINK_LIBRARIES(AntTweakBar
     ${GL_LIBRARIES})
 
 # AntTweakBar python module 
+SET(CMAKE_SWIG_FLAGS "-builtin")
+
 SET(SWIG_SRC_FILES AntTweakBarSWIG.cpp 
                    AntTweakBarSWIG.h)
 
@@ -128,4 +91,5 @@ SWIG_LINK_LIBRARIES(AntTweakBar AntTweakBar
     ${CMAKE_THREAD_LIBS_INIT}
     ${GL_LIBRARIES})
 
- 
+ # setup footer
+INCLUDE(${RESEARCH_PATH}/Common/cmake/FooterConfig.cmake)
