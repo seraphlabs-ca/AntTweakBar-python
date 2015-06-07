@@ -1,6 +1,6 @@
 # CMake file for generating Python modules.
 CMAKE_MINIMUM_REQUIRED(VERSION 2.8)
-PROJECT(ANTTWEAKBAR)
+PROJECT(AntTweakBar)
 
 # Base research path
 SET(RESEARCH_PATH "${CMAKE_SOURCE_DIR}/../../..")
@@ -67,8 +67,8 @@ ENDFOREACH(F)
 
 
 # AntTweakBar library 
-ADD_LIBRARY(AntTweakBar ${SRC_FILES})
-TARGET_LINK_LIBRARIES(AntTweakBar
+ADD_LIBRARY(anttweakbar ${SRC_FILES})
+TARGET_LINK_LIBRARIES(anttweakbar
     ${OPENGL_LIBRARIES} 
     ${GLUT_LIBRARIES} 
     ${X11_LIBRARIES}
@@ -82,14 +82,28 @@ SET(SWIG_SRC_FILES AntTweakBarSWIG.cpp
                    AntTweakBarSWIG.h)
 
 SET_SOURCE_FILES_PROPERTIES(AntTweakBar.i PROPERTIES CPLUSPLUS ON)
-SWIG_ADD_MODULE(AntTweakBar python AntTweakBar.i ${SWIG_SRC_FILES})
-SWIG_LINK_LIBRARIES(AntTweakBar AntTweakBar 
+SWIG_ADD_MODULE(anttweakbar python AntTweakBar.i ${SWIG_SRC_FILES})
+SWIG_LINK_LIBRARIES(anttweakbar anttweakbar 
     ${PYTHON_LIBRARIES} 
     ${OPENGL_LIBRARIES} 
     ${GLUT_LIBRARIES} 
     ${X11_LIBRARIES} 
     ${CMAKE_THREAD_LIBS_INIT}
     ${GL_LIBRARIES})
+
+# install files
+# install files
+INSTALL(TARGETS anttweakbar
+        DESTINATION ${PROJECT_LIBRARY_INSTALL_PATH})
+INSTALL(FILES "${CMAKE_CURRENT_SOURCE_DIR}/AntTweakBarSWIG.h" 
+        DESTINATION ${PROJECT_INCLUDE_INSTALL_PATH})
+INSTALL(FILES "${PROJECT_LIBRARY_INSTALL_PATH}/_anttweakbar.so" 
+        DESTINATION ${PROJECT_PYTHON_INSTALL_PATH})
+INSTALL(FILES "${CMAKE_CURRENT_BINARY_DIR}/anttweakbar.py" 
+        DESTINATION ${PROJECT_PYTHON_INSTALL_PATH})
+
+# install configuration
+# INCLUDE(${RESEARCH_PATH}/Common/cmake/InstallConfig.cmake)
 
  # setup footer
 INCLUDE(${RESEARCH_PATH}/Common/cmake/FooterConfig.cmake)
