@@ -107,3 +107,7 @@ INSTALL(FILES "${CMAKE_CURRENT_BINARY_DIR}/AntTweakBar.py"
 
  # setup footer
 INCLUDE(${RESEARCH_PATH}/Common/cmake/FooterConfig.cmake)
+
+# generate documentations
+INCLUDE(${RESEARCH_PATH}/Common/cmake/DocConfig.cmake)
+
