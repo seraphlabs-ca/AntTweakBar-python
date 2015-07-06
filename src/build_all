@@ -1,9 +1,0 @@
-#! /usr/bin/env zsh
-
-cd cpp && \
-rm -Rf build && \
-mkdir -p build && \
-cd build && \
-cmake .. $* && \
-cd ../.. && \
-./make_all 
