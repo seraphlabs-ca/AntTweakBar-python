@@ -1,4 +1,4 @@
-%include "numpy.i"
+%include "common/common.i"
 
 %apply (int DIM1, double* INPLACE_ARRAY1)
         {(int i, double* M)}
@@ -19,10 +19,8 @@
 %include "typemaps.i"
 %include "std_list.i"
 
-%include "common.i"
-
 // Ignore Windows-related symbols in AntTweakBar 1.16
 %ignore TwEventWin;
 
-%include "AntTweakBar.h"
-%include "AntTweakBarSWIG.h"
+%include "anttweakbar/AntTweakBar.h"
+%include "anttweakbar/AntTweakBarSWIG.h"

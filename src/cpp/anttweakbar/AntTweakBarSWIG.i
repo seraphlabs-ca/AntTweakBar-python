@@ -8,10 +8,4 @@
 #include "AntTweakBarSWIG.h"
 %}
 
-%include "numpy.i"
-
-%init %{
-    import_array();
-%}
-
 %include "AntTweakBar.i"
