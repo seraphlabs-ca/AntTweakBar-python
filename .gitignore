@@ -1,1 +1,3 @@
 build
+src/AntTweakBar/AntTweakBarSWIG.py
+src/AntTweakBar/_AntTweakBarSWIG.so
