@@ -48,6 +48,10 @@ FOREACH (F ${SRC_FILES_NAME})
 ENDFOREACH(F)
 
 
+# Copy AntTweakBar header
+FILE(COPY ${CMAKE_CURRENT_SOURCE_DIR}/../../packages/AntTweakBar/include/AntTweakBar.h
+     DESTINATION ${CMAKE_CURRENT_SOURCE_DIR} )
+
 # AntTweakBar library
 
 SET(ANTTWEAKBAR_LIBRARIES
