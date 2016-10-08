@@ -61,7 +61,6 @@ FILE(COPY ${CMAKE_CURRENT_SOURCE_DIR}/../../packages/AntTweakBar/include/AntTwea
 # AntTweakBar library
 
 SET(ANTTWEAKBAR_LIBRARIES
-    helper
     ${Boost_LIBRARIES}
     ${OPENGL_LIBRARIES}
     ${GLUT_LIBRARIES}
